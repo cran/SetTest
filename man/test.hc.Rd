@@ -4,16 +4,22 @@
 \alias{test.hc}
 \title{Multiple comparison test using Higher Criticism (HC) statitics.}
 \usage{
-test.hc(prob, beta, LS = F, ZW = F)
+test.hc(prob, M, k0, k1, LS = F, ZW = F, onesided = FALSE)
 }
 \arguments{
 \item{prob}{- vector of input p-values.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
+
+\item{k0}{- search range starts from the k0th smallest p-value.}
+
+\item{k1}{- search range ends at the k1th smallest p-value.}
 
 \item{LS}{- if LS = T, then method of Li and Siegmund (2015) will be implemented.When n and q is very large, approximation method is prefered.}
 
 \item{ZW}{- if ZW = T, then approximation method of Zhang and Wu will be implemented.}
+
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \value{
 pvalue - The p-value of the HC test.
@@ -27,17 +33,16 @@ Multiple comparison test using Higher Criticism (HC) statitics.
 }
 \examples{
 pval.test = runif(10)
-test.hc(pval.test, 0.5)
-test.hc(pval.test, 0.5, LS = TRUE)
-test.hc(pval.test, 0.5, ZW = TRUE)
+test.hc(pval.test, M=diag(10), k0=1, k1=10)
+test.hc(pval.test, M=diag(10), k0=1, k1=10, LS = TRUE)
+test.hc(pval.test, M=diag(10), k0=1, k1=10, ZW = TRUE)
 #When the input are statistics#
 stat.test = rnorm(20)
-p.test = 1 - pnorm(stat.test)
-test.hc(p.test, beta = 0.5)
+p.test = 2*(1 - pnorm(abs(stat.test)))
+test.hc(p.test, M=diag(20), k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 
@@ -46,4 +51,3 @@ Signal Detection Methods in Finite Samples", submitted.
 \seealso{
 \code{\link{stat.hc}} for the definition of the statistic.
 }
-

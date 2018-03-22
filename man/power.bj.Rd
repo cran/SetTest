@@ -12,7 +12,7 @@ power.bj(alpha, n, beta, method = "gaussian-gaussian", eps = 0, mu = 0,
 
 \item{n}{- dimension parameter, i.e. the number of input statitics to construct B-J statistic.}
 
-\item{beta}{- search range parameter. Beta must be between 1/n and 1.}
+\item{beta}{- search range parameter. Search range = (1, beta*n). Beta must be between 1/n and 1.}
 
 \item{method}{- different alternative hypothesis, including mixtures such as, "gaussian-gaussian", "gaussian-t", "t-t", "chisq-chisq", and "exp-chisq". By default, we use Gaussian mixture.}
 
@@ -47,15 +47,10 @@ speified by the "method" argument:
 "exp-chisq": \eqn{F_0} is the CDF of exponential distribution with parameter defined by df and \eqn{F = F_1} is the CDF of non-central Chisqaure distribution with degree of freedom defined by df and non-centrality defined by delta.
 }
 \examples{
-pval <- runif(10)
-bjstat <- stat.phi(pval, 1, 0.5)$value
-alpha_phi <- 1 - pphi(q=bjstat, n=10, s=1, beta=0.5)
-#If the alternative hypothesis Gaussian mixture with eps = 0.1 and mu = 1.2:#
-power.bj(alpha_phi, 10, 0.5, eps = 0.1, mu = 1.2)
+power.bj(0.05, n=10, beta=0.5, eps = 0.1, mu = 1.2)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 
@@ -66,4 +61,3 @@ Signal Detection Methods in Finite Samples", submitted.
 \seealso{
 \code{\link{stat.bj}} for the definition of the statistic.
 }
-

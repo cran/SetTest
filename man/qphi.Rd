@@ -4,16 +4,20 @@
 \alias{qphi}
 \title{Quantile of phi-divergence statitic under the null hypothesis.}
 \usage{
-qphi(p, n, s, beta)
+qphi(p, M, k0, k1, s = 2, onesided = FALSE)
 }
 \arguments{
 \item{p}{-  a scalar left probability that defines the quantile.}
 
-\item{n}{- dimension parameter, i.e. the number of input statitics to construct phi-divergence statistic.}
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
 
-\item{s}{- phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.}
+\item{k0}{- search range starts from the k0th smallest p-value.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{k1}{- search range ends at the k1th smallest p-value.}
+
+\item{s}{- the phi-divergence test parameter.}
+
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \value{
 Quantile of phi-divergence statistics.
@@ -23,15 +27,13 @@ Quantile of phi-divergence statitic under the null hypothesis.
 }
 \examples{
 ## The 0.05 critical value of HC statistic when n = 10:
-qphi(p=.95, n=10, s=2, beta=0.5)
+qphi(p=.95, M=diag(10), k0=1, k1=5, s=2, onesided=FALSE)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 }
 \seealso{
 \code{\link{stat.phi}} for the definition of the statistic.
 }
-

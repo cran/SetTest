@@ -2,37 +2,33 @@
 % Please edit documentation in R/pphi.R
 \name{pphi}
 \alias{pphi}
-\title{CDF of phi-divergence statitic under the null hypothesis.}
+\title{calculate the left-tail probability of phi-divergence under general correlation matrix.}
 \usage{
-pphi(q, n, s, beta)
+pphi(q, M, k0, k1, s = 2, t = 30, onesided = FALSE)
 }
 \arguments{
 \item{q}{- quantile, must be a scalar.}
 
-\item{n}{- dimension parameter, i.e. the number of input statitics to construct phi-divergence statistic.}
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
 
-\item{s}{- phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.}
+\item{k0}{- search range starts from the k0th smallest p-value.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
-}
-\value{
-The left-tail probability of the null distribution of  phi-divergence statistic at the given quantile.
+\item{k1}{- search range ends at the k1th smallest p-value.}
+
+\item{s}{- the phi-divergence test parameter.}
+
+\item{t}{- numerical truncation parameter.}
+
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \description{
-CDF of phi-divergence statitic under the null hypothesis.
+calculate the left-tail probability of phi-divergence under general correlation matrix.
 }
 \examples{
-pval <- runif(10)
-hcstat <- stat.phi(pval, 2, 0.5)$value
-pphi(q=hcstat, n=10, s=2, beta=0.5)
+M = toeplitz(1/(1:10)*(-1)^(0:9)) #alternating polynomial decaying correlation matrix
+pphi(q=2, M=M, k0=1, k1=5, s=2)
+pphi(q=2, M=diag(10), k0=1, k1=5, s=2)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
-
-2. Jager, Leah; Wellner, Jon A. "Goodness-of-fit tests via phi-divergences". Annals of Statistics 35 (2007).
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 }
-\seealso{
-\code{\link{stat.phi}} for the definition of the statistic.
-}
-

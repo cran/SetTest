@@ -4,12 +4,18 @@
 \alias{test.bj}
 \title{Multiple comparison test using Berk and Jones (BJ) statitics.}
 \usage{
-test.bj(prob, beta)
+test.bj(prob, M, k0, k1, onesided = FALSE)
 }
 \arguments{
 \item{prob}{- vector of input p-values.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
+
+\item{k0}{- search range starts from the k0th smallest p-value.}
+
+\item{k1}{- search range ends at the k1th smallest p-value.}
+
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \value{
 pvalue - the p-value of the Berk-Jones test.
@@ -22,15 +28,14 @@ location - the order of the input p-values to obtain BJ statistic.
 Multiple comparison test using Berk and Jones (BJ) statitics.
 }
 \examples{
-test.bj(runif(10), 0.5)
+test.bj(runif(10), M=diag(10), k0=1, k1=10)
 #When the input are statistics#
 stat.test = rnorm(20)
-p.test = 1 - pnorm(stat.test)
-test.bj(p.test, beta = 0.5)
+p.test = 2*(1 - pnorm(abs(stat.test)))
+test.bj(p.test, M=diag(20), k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Jager, Leah; Wellner, Jon A. "Goodness-of-fit tests via phi-divergences". Annals of Statistics 35 (2007).
 
@@ -39,4 +44,3 @@ Signal Detection Methods in Finite Samples", submitted.
 \seealso{
 \code{\link{stat.bj}} for the definition of the statistic.
 }
-

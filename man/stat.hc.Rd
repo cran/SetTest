@@ -4,12 +4,14 @@
 \alias{stat.hc}
 \title{Construct Higher Criticism (HC) statitics.}
 \usage{
-stat.hc(p, beta = 0.5)
+stat.hc(p, k0 = 1, k1 = NA)
 }
 \arguments{
 \item{p}{- vector of input p-values.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{k0}{- search range left end parameter. Default k0 = 1.}
+
+\item{k1}{- search range right end parameter. Default k1 = 0.5*number of input p-values.}
 }
 \value{
 value - HC statistic constructed from a vector of p-values.
@@ -26,16 +28,14 @@ Let \eqn{p_{(i)}}, \eqn{i = 1,...,n} be a sequence of ordered p-values, the high
 \deqn{HC = \sqrt{n} \max_{1 \leq i\leq \lfloor \beta n \rfloor} [i/n - p_{(i)}] /\sqrt{p_{(i)}(1 - p_{(i)})}}
 }
 \examples{
-stat.hc(runif(10), beta = 0.3)
+stat.hc(runif(10))
 #When the input are statistics#
 stat.test = rnorm(20)
 p.test = 1 - pnorm(stat.test)
-stat.hc(p.test, beta = 0.5)
+stat.hc(p.test, k0 = 1, k1 = 10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 }
-

@@ -4,14 +4,16 @@
 \alias{stat.phi}
 \title{Construct phi-divergence statitics.}
 \usage{
-stat.phi(p, s, beta)
+stat.phi(p, s, k0 = 1, k1 = NA)
 }
 \arguments{
 \item{p}{- vector of input p-values.}
 
 \item{s}{- phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{k0}{- search range left end parameter. Default k0 = 1.}
+
+\item{k1}{- search range right end parameter. Default k1 = 0.5*number of input p-values.}
 }
 \value{
 value - phi-divergence statistic constructed from a vector of p-values.
@@ -29,16 +31,14 @@ Let \eqn{p_{(i)}}, \eqn{i = 1,...,n} be a sequence of ordered p-values, the phi-
 and when \eqn{p_{(i)} > i/n}, \eqn{j = 1}, otherwise \eqn{j = 0}.
 }
 \examples{
-stat.phi(runif(10), 2, 0.5)
+stat.phi(runif(10), s = 2)
 #When the input are statistics#
 stat.test = rnorm(20)
 p.test = 1 - pnorm(stat.test)
-stat.phi(p.test, s = 0.5, beta = 0.5)
+stat.phi(p.test, s = 0.5, k0 = 2, k1 = 5)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Jager, Leah; Wellner, Jon A. "Goodness-of-fit tests via phi-divergences". Annals of Statistics 35 (2007).
 }
-

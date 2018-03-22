@@ -1,25 +1,27 @@
 #' Quantile of Higher Criticism statitics under the null hypothesis.
 #' @param p -  a scalar left probability that defines the quantile.
-#' @param n - dimension parameter, i.e. the number of input statitics to construct HC statistic.
-#' @param beta - search range parameter . Beta must be between 1/n and 1.
+#' @param M - correlation matrix of input statistics (of the input p-values).
+#' @param k0 - search range starts from the k0th smallest p-value.
+#' @param k1 - search range ends at the k1th smallest p-value.
+#' @param onesided - TRUE if the input p-values are one-sided.
 #' @param LS - if LS = T, then method of Li and Siegmund (2015) will be implemented.When n and q is very large, approximation method is prefered.
 #' @param ZW - if ZW = T, then approximation method of Zhang and Wu will be implemented.
 #' @return Quantile of HC statistics.
 #' @seealso \code{\link{stat.hc}} for the definition of the statistic.
-#' @references 1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-#' Signal Detection Methods in Finite Samples", submitted.
+#' @references 1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 #'
 #' 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 #'
 #' 3. Li, Jian; Siegmund, David. "Higher criticism: p-values and criticism". Annals of Statistics 43 (2015).
 #' @examples
 #' ## The 0.05 critical value of HC statistic when n = 10:
-#' qhc(p=.95, n=10, beta=0.5)
+#' qhc(p=.95, M=diag(10), k0=1, k1=5, onesided=FALSE)
 #' @export
-qhc <- function(p, n, beta, LS = F, ZW = F){
+qhc <- function(p, M, k0, k1, onesided=FALSE, LS = F, ZW = F){
   if(LS == F && ZW == F){
-    return(qphi(p, n, s=2, beta))
+    return(qphi(p, M, k0, k1, s=2, onesided))
   }else{
+    n = length(M[1,])
     if(p < 0.5){
       stop("probability is too small, approximation is not accurate")
     }else{

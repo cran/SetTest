@@ -4,14 +4,18 @@
 \alias{qbj}
 \title{Quantile of Berk-Jones statitic under the null hypothesis.}
 \usage{
-qbj(p, n, beta)
+qbj(p, M, k0, k1, onesided = FALSE)
 }
 \arguments{
 \item{p}{- a scalar left probability that defines the quantile.}
 
-\item{n}{- dimension parameter, i.e. the number of input statitics to construct HC statistic.}
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{k0}{- search range starts from the k0th smallest p-value.}
+
+\item{k1}{- search range ends at the k1th smallest p-value.}
+
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \value{
 Quantile of BJ statistics.
@@ -21,11 +25,10 @@ Quantile of Berk-Jones statitic under the null hypothesis.
 }
 \examples{
 ## The 0.05 critical value of BJ statistic when n = 10:
-qbj(p=.95, n=10, beta=0.5)
+qbj(p=.95, M=diag(10), k0=1, k1=5, onesided=FALSE)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 
@@ -34,4 +37,3 @@ Signal Detection Methods in Finite Samples", submitted.
 \seealso{
 \code{\link{stat.bj}} for the definition of the statistic.
 }
-

@@ -2,7 +2,7 @@
 #' @param alpha - type-I error rate.
 #' @param n - dimension parameter, i.e. the number of input statitics to construct phi-divergence statistic.
 #' @param s - phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.
-#' @param beta - search range parameter . Beta must be between 1/n and 1.
+#' @param beta - search range parameter. Search range = (1, beta*n). Beta must be between 1/n and 1.
 #' @param method - different alternative hypothesis, including mixtures such as, "gaussian-gaussian", "gaussian-t", "t-t", "chisq-chisq", and "exp-chisq". By default, we use Gaussian mixture.
 #' @param eps - mixing parameter of the mixture.
 #' @param mu - mean of non standard Gaussian model.
@@ -24,22 +24,19 @@
 #'
 #' "exp-chisq": \eqn{F_0} is the CDF of exponential distribution with parameter defined by df and \eqn{F = F_1} is the CDF of non-central Chisqaure distribution with degree of freedom defined by df and non-centrality defined by delta.
 #' @seealso \code{\link{stat.phi}} for the definition of the statistic.
-#' @references 1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-#' Signal Detection Methods in Finite Samples", submitted.
+#' @references 1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 #'
 #' 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 #' @examples
-#' pval <- runif(10)
-#' hcstat <- stat.phi(pval, 2, 0.5)$value
-#' alpha_phi <- 1 - pphi(q=hcstat, n=10, s=2, beta=0.5)
 #' #If the alternative hypothesis Gaussian mixture with eps = 0.1 and mu = 1.2:#
-#' power.phi(alpha_phi, 10, 2, 0.5, eps = 0.1, mu = 1.2)
+#' power.phi(0.05, n=10, s=2, beta=0.5, eps = 0.1, mu = 1.2)
 #' @export
 #' @importFrom stats pchisq pnorm pt qchisq qexp qnorm qt
 power.phi <- function(alpha, n, s, beta, method = "gaussian-gaussian",
                       eps=0, mu=0, df=1, delta=0){
+
   t = 28
-  q = qphi(p=1-alpha, n, s, beta)
+  q = suppressWarnings(qphi(p=1-alpha, diag(10), s, k0=1, k1=beta*n))
   m = floor(beta*n)
   if(m<1){
     stop("Search Range is too small: beta*n < 1")

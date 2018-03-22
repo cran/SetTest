@@ -4,14 +4,18 @@
 \alias{pbj}
 \title{CDF of Berk-Jones statitic under the null hypothesis.}
 \usage{
-pbj(q, n, beta)
+pbj(q, M, k0, k1, onesided = FALSE)
 }
 \arguments{
 \item{q}{- quantile, must be a scalar.}
 
-\item{n}{- dimension parameter, i.e. the number of input statitics to construct BJ statistic.}
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
 
-\item{beta}{- search range parameter. Beta must be between 1/n and 1.}
+\item{k0}{- search range starts from the k0th smallest p-value.}
+
+\item{k1}{- search range ends at the k1th smallest p-value.}
+
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \value{
 The left-tail probability of the null distribution of B-J statistic at the given quantile.
@@ -21,12 +25,11 @@ CDF of Berk-Jones statitic under the null hypothesis.
 }
 \examples{
 pval <- runif(10)
-bjstat <- stat.phi(pval, 1, 0.5)$value
-pbj(q=bjstat, n=10, beta=0.5)
+bjstat <- stat.phi(pval, s=1, k0=1, k1=10)$value
+pbj(q=bjstat, M=diag(10), k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal.
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 
@@ -35,4 +38,3 @@ Signal Detection Methods in Finite Samples", submitted.
 \seealso{
 \code{\link{stat.bj}} for the definition of the statistic.
 }
-

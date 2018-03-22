@@ -4,18 +4,22 @@
 \alias{phc}
 \title{CDF of Higher Criticism statitic under the null hypothesis.}
 \usage{
-phc(q, n, beta, LS = F, ZW = F)
+phc(q, M, k0, k1, LS = F, ZW = F, onesided = FALSE)
 }
 \arguments{
 \item{q}{- quantile, must be a scalar.}
 
-\item{n}{- dimension parameter, i.e. the number of input statitics to construct HC statistic.}
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{k0}{- search range starts from the k0th smallest p-value.}
 
-\item{LS}{- if LS = T, then method of Li and Siegmund (2015) will be implemented.When n and q is very large, approximation method is prefered.}
+\item{k1}{- search range ends at the k1th smallest p-value.}
+
+\item{LS}{- if LS = T, then method of Li and Siegmund (2015) will be implemented (for independence case only).}
 
 \item{ZW}{- if ZW = T, then approximation method of Zhang and Wu will be implemented.}
+
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \value{
 The left-tail probability of the null distribution of HC statistic at the given quantile.
@@ -25,12 +29,11 @@ CDF of Higher Criticism statitic under the null hypothesis.
 }
 \examples{
 pval <- runif(10)
-hcstat <- stat.phi(pval, 2, 0.5)$value
-phc(q=hcstat, n=10, beta=0.5)
+hcstat <- stat.phi(pval, s=2, k0=1, k1=5)$value
+phc(q=hcstat, M=diag(10), k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 
@@ -39,4 +42,3 @@ Signal Detection Methods in Finite Samples", submitted.
 \seealso{
 \code{\link{stat.hc}} for the definition of the statistic.
 }
-

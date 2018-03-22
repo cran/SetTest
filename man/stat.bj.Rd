@@ -4,12 +4,14 @@
 \alias{stat.bj}
 \title{Construct Berk and Jones (BJ) statitics.}
 \usage{
-stat.bj(p, beta = 0.5)
+stat.bj(p, k0 = 1, k1 = NA)
 }
 \arguments{
 \item{p}{- vector of input p-values.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{k0}{- search range left end parameter. Default k0 = 1.}
+
+\item{k1}{- search range right end parameter. Default k1 = 0.5*number of input p-values.}
 }
 \value{
 value - BJ statistic constructed from a vector of p-values.
@@ -27,18 +29,16 @@ Let \eqn{p_{(i)}}, \eqn{i = 1,...,n} be a sequence of ordered p-values, the Berk
 and when \eqn{p_{(i)} > i/n}, \eqn{j = 1}, otherwise \eqn{j = 0}.
 }
 \examples{
-stat.bj(runif(10), beta = 0.3)
+stat.bj(runif(10))
 #When the input are statistics#
 stat.test = rnorm(20)
 p.test = 1 - pnorm(stat.test)
-stat.bj(p.test, beta = 0.5)
+stat.bj(p.test, k0 = 2, k1 = 20)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Jager, Leah; Wellner, Jon A. "Goodness-of-fit tests via phi-divergences". Annals of Statistics 35 (2007).
 
 3. Berk, R.H. & Jones, D.H. Z. "Goodness-of-fit test statistics that dominate the Kolmogorov statistics". Wahrscheinlichkeitstheorie verw Gebiete (1979) 47: 47.
 }
-

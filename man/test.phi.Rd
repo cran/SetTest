@@ -4,19 +4,25 @@
 \alias{test.phi}
 \title{Multiple comparison test using phi-divergence statitics.}
 \usage{
-test.phi(prob, s, beta)
+test.phi(prob, M, k0, k1, s = 2, onesided = FALSE)
 }
 \arguments{
 \item{prob}{- vector of input p-values.}
 
+\item{M}{- correlation matrix of input statistics (of the input p-values).}
+
+\item{k0}{- search range starts from the k0th smallest p-value.}
+
+\item{k1}{- search range ends at the k1th smallest p-value.}
+
 \item{s}{- phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{onesided}{- TRUE if the input p-values are one-sided.}
 }
 \value{
 pvalue - The p-value of the phi-divergence test.
 
-phistat - phi-divergence statistic.
+phistat - phi-diergence statistic.
 
 location - the order of the input p-values to obtain phi-divergence statistic.
 }
@@ -24,19 +30,17 @@ location - the order of the input p-values to obtain phi-divergence statistic.
 Multiple comparison test using phi-divergence statitics.
 }
 \examples{
-test.phi(runif(10), s = 0.5, beta = 0.5)
+test.phi(runif(10), M=diag(10), s = 0.5, k0=1, k1=10)
 #When the input are statistics#
 stat.test = rnorm(20)
-p.test = 1 - pnorm(stat.test)
-test.phi(p.test, s = 0.5,beta = 0.5)
+p.test = 2*(1 - pnorm(abs(stat.test)))
+test.phi(p.test, M=diag(20), s = 0.5, k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Jager, Leah; Wellner, Jon A. "Goodness-of-fit tests via phi-divergences". Annals of Statistics 35 (2007).
 }
 \seealso{
-\code{\link{stat.phi}} for the definition of the statistic.
+\code{\link{stat.phi}} for the definition of the statistic.v
 }
-

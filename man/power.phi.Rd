@@ -14,7 +14,7 @@ power.phi(alpha, n, s, beta, method = "gaussian-gaussian", eps = 0,
 
 \item{s}{- phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.}
 
-\item{beta}{- search range parameter . Beta must be between 1/n and 1.}
+\item{beta}{- search range parameter. Search range = (1, beta*n). Beta must be between 1/n and 1.}
 
 \item{method}{- different alternative hypothesis, including mixtures such as, "gaussian-gaussian", "gaussian-t", "t-t", "chisq-chisq", and "exp-chisq". By default, we use Gaussian mixture.}
 
@@ -49,19 +49,14 @@ speified by the "method" argument:
 "exp-chisq": \eqn{F_0} is the CDF of exponential distribution with parameter defined by df and \eqn{F = F_1} is the CDF of non-central Chisqaure distribution with degree of freedom defined by df and non-centrality defined by delta.
 }
 \examples{
-pval <- runif(10)
-hcstat <- stat.phi(pval, 2, 0.5)$value
-alpha_phi <- 1 - pphi(q=hcstat, n=10, s=2, beta=0.5)
 #If the alternative hypothesis Gaussian mixture with eps = 0.1 and mu = 1.2:#
-power.phi(alpha_phi, 10, 2, 0.5, eps = 0.1, mu = 1.2)
+power.phi(0.05, n=10, s=2, beta=0.5, eps = 0.1, mu = 1.2)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal
-Signal Detection Methods in Finite Samples", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
 
 2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
 }
 \seealso{
 \code{\link{stat.phi}} for the definition of the statistic.
 }
-
