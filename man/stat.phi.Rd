@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat.phi.R
 \name{stat.phi}
 \alias{stat.phi}
-\title{Construct phi-divergence statitics.}
+\title{Construct phi-divergence statistics.}
 \usage{
 stat.phi(p, s, k0 = 1, k1 = NA)
 }
@@ -23,7 +23,7 @@ location - the order of the p-values to obtain phi-divergence statistic.
 stat - vector of marginal phi-divergence statistics.
 }
 \description{
-Construct phi-divergence statitics.
+Construct phi-divergence statistics.
 }
 \details{
 Let \eqn{p_{(i)}}, \eqn{i = 1,...,n} be a sequence of ordered p-values, the phi-divergence statistic

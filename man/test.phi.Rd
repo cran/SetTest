@@ -2,9 +2,9 @@
 % Please edit documentation in R/test.phi.R
 \name{test.phi}
 \alias{test.phi}
-\title{Multiple comparison test using phi-divergence statitics.}
+\title{Multiple comparison test using phi-divergence statistics.}
 \usage{
-test.phi(prob, M, k0, k1, s = 2, onesided = FALSE)
+test.phi(prob, M, k0, k1, s = 2, onesided = FALSE, method = "ecc", ei = NULL)
 }
 \arguments{
 \item{prob}{- vector of input p-values.}
@@ -18,6 +18,10 @@ test.phi(prob, M, k0, k1, s = 2, onesided = FALSE)
 \item{s}{- phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.}
 
 \item{onesided}{- TRUE if the input p-values are one-sided.}
+
+\item{method}{- default = "ecc": the effective correlation coefficient method in reference 2. "ave": the average method in reference 3, which is an earlier version of reference 2. The "ecc" method is more accurate and numerically stable than "ave" method.}
+
+\item{ei}{- the eigenvalues of M if available.}
 }
 \value{
 pvalue - The p-value of the phi-divergence test.
@@ -27,19 +31,20 @@ phistat - phi-diergence statistic.
 location - the order of the input p-values to obtain phi-divergence statistic.
 }
 \description{
-Multiple comparison test using phi-divergence statitics.
+Multiple comparison test using phi-divergence statistics.
 }
 \examples{
-test.phi(runif(10), M=diag(10), s = 0.5, k0=1, k1=10)
-#When the input are statistics#
-stat.test = rnorm(20)
+stat.test = rnorm(20) # Z-scores
 p.test = 2*(1 - pnorm(abs(stat.test)))
 test.phi(p.test, M=diag(20), s = 0.5, k0=1, k1=10)
+test.phi(p.test, M=diag(20), s = 1, k0=1, k1=10)
+test.phi(p.test, M=diag(20), s = 2, k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
-
-2. Jager, Leah; Wellner, Jon A. "Goodness-of-fit tests via phi-divergences". Annals of Statistics 35 (2007).
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and power of optimal signal-detection statistics in finite case", IEEE Transactions on Signal Processing (2020) 68, 1021-1033
+2. Hong Zhang and Zheyang Wu. "The general goodness-of-fit tests for correlated data", Computational Statistics & Data Analysis (2022) 167, 107379
+3. Hong Zhang and Zheyang Wu. "Generalized Goodness-Of-Fit Tests for Correlated Data", arXiv:1806.03668.
+4. Leah Jager and Jon Wellner. "Goodness-of-fit tests via phi-divergences". Annals of Statistics 35 (2007).
 }
 \seealso{
 \code{\link{stat.phi}} for the definition of the statistic.v

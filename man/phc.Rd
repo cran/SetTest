@@ -2,9 +2,9 @@
 % Please edit documentation in R/phc.R
 \name{phc}
 \alias{phc}
-\title{CDF of Higher Criticism statitic under the null hypothesis.}
+\title{CDF of Higher Criticism statistic under the null hypothesis.}
 \usage{
-phc(q, M, k0, k1, LS = F, ZW = F, onesided = FALSE)
+phc(q, M, k0, k1, onesided = FALSE, method = "ecc", ei = NULL)
 }
 \arguments{
 \item{q}{- quantile, must be a scalar.}
@@ -15,17 +15,17 @@ phc(q, M, k0, k1, LS = F, ZW = F, onesided = FALSE)
 
 \item{k1}{- search range ends at the k1th smallest p-value.}
 
-\item{LS}{- if LS = T, then method of Li and Siegmund (2015) will be implemented (for independence case only).}
-
-\item{ZW}{- if ZW = T, then approximation method of Zhang and Wu will be implemented.}
-
 \item{onesided}{- TRUE if the input p-values are one-sided.}
+
+\item{method}{- default = "ecc": the effective correlation coefficient method in reference 2. "ave": the average method in reference 3, which is an earlier version of reference 2. The "ecc" method is more accurate and numerically stable than "ave" method.}
+
+\item{ei}{- the eigenvalues of M if available.}
 }
 \value{
 The left-tail probability of the null distribution of HC statistic at the given quantile.
 }
 \description{
-CDF of Higher Criticism statitic under the null hypothesis.
+CDF of Higher Criticism statistic under the null hypothesis.
 }
 \examples{
 pval <- runif(10)
@@ -33,11 +33,9 @@ hcstat <- stat.phi(pval, s=2, k0=1, k1=5)$value
 phc(q=hcstat, M=diag(10), k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
-
-2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
-
-3. Li, Jian; Siegmund, David. "Higher criticism: p-values and criticism". Annals of Statistics 43 (2015).
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and power of optimal signal-detection statistics in finite case", IEEE Transactions on Signal Processing (2020) 68, 1021-1033
+2. Hong Zhang and Zheyang Wu. "The general goodness-of-fit tests for correlated data", Computational Statistics & Data Analysis (2022) 167, 107379
+3. Hong Zhang and Zheyang Wu. "Generalized Goodness-Of-Fit Tests for Correlated Data", arXiv:1806.03668.
 }
 \seealso{
 \code{\link{stat.hc}} for the definition of the statistic.

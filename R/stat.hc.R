@@ -1,4 +1,4 @@
-#' Construct Higher Criticism (HC) statitics.
+#' Construct Higher Criticism (HC) statistics.
 #' @param p - vector of input p-values.
 #' @param k0 - search range left end parameter. Default k0 = 1.
 #' @param k1 - search range right end parameter. Default k1 = 0.5*number of input p-values.

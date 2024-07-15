@@ -4,8 +4,16 @@
 \alias{power.bj}
 \title{Statistical power of Berk and Jones test.}
 \usage{
-power.bj(alpha, n, beta, method = "gaussian-gaussian", eps = 0, mu = 0,
-  df = 1, delta = 0)
+power.bj(
+  alpha,
+  n,
+  beta,
+  method = "gaussian-gaussian",
+  eps = 0,
+  mu = 0,
+  df = 1,
+  delta = 0
+)
 }
 \arguments{
 \item{alpha}{- type-I error rate.}

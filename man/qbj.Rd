@@ -2,9 +2,9 @@
 % Please edit documentation in R/qbj.R
 \name{qbj}
 \alias{qbj}
-\title{Quantile of Berk-Jones statitic under the null hypothesis.}
+\title{Quantile of Berk-Jones statistic under the null hypothesis.}
 \usage{
-qbj(p, M, k0, k1, onesided = FALSE)
+qbj(p, M, k0, k1, onesided = FALSE, method = "ecc", ei = NULL, err_thr = 1e-04)
 }
 \arguments{
 \item{p}{- a scalar left probability that defines the quantile.}
@@ -16,23 +16,28 @@ qbj(p, M, k0, k1, onesided = FALSE)
 \item{k1}{- search range ends at the k1th smallest p-value.}
 
 \item{onesided}{- TRUE if the input p-values are one-sided.}
+
+\item{method}{- default = "ecc": the effective correlation coefficient method in reference 2. "ave": the average method in reference 3, which is an earlier version of reference 2. The "ecc" method is more accurate and numerically stable than "ave" method.}
+
+\item{ei}{- the eigenvalues of M if available.}
+
+\item{err_thr}{- the error threshold. The default value is 1e-4.}
 }
 \value{
 Quantile of BJ statistics.
 }
 \description{
-Quantile of Berk-Jones statitic under the null hypothesis.
+Quantile of Berk-Jones statistic under the null hypothesis.
 }
 \examples{
 ## The 0.05 critical value of BJ statistic when n = 10:
 qbj(p=.95, M=diag(10), k0=1, k1=5, onesided=FALSE)
+qbj(p=1-1e-5, M=diag(10), k0=1, k1=5, onesided=FALSE, err_thr=1e-8)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
-
-2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
-
-3. Berk, R.H. & Jones, D.H. Z. "Goodness-of-fit test statistics that dominate the Kolmogorov statistics". Wahrscheinlichkeitstheorie verw Gebiete (1979) 47: 47.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and power of optimal signal-detection statistics in finite case", IEEE Transactions on Signal Processing (2020) 68, 1021-1033
+2. Hong Zhang and Zheyang Wu. "The general goodness-of-fit tests for correlated data", Computational Statistics & Data Analysis (2022) 167, 107379
+3. Hong Zhang and Zheyang Wu. "Generalized Goodness-Of-Fit Tests for Correlated Data", arXiv:1806.03668.
 }
 \seealso{
 \code{\link{stat.bj}} for the definition of the statistic.

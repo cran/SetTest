@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat.bj.R
 \name{stat.bj}
 \alias{stat.bj}
-\title{Construct Berk and Jones (BJ) statitics.}
+\title{Construct Berk and Jones (BJ) statistics.}
 \usage{
 stat.bj(p, k0 = 1, k1 = NA)
 }
@@ -21,7 +21,7 @@ location - the order of the p-values to obtain BJ statistic.
 stat - vector of marginal BJ statistics.
 }
 \description{
-Construct Berk and Jones (BJ) statitics.
+Construct Berk and Jones (BJ) statistics.
 }
 \details{
 Let \eqn{p_{(i)}}, \eqn{i = 1,...,n} be a sequence of ordered p-values, the Berk and Jones statistic

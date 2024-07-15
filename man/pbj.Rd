@@ -4,7 +4,7 @@
 \alias{pbj}
 \title{CDF of Berk-Jones statitic under the null hypothesis.}
 \usage{
-pbj(q, M, k0, k1, onesided = FALSE)
+pbj(q, M, k0, k1, onesided = FALSE, method = "ecc", ei = NULL)
 }
 \arguments{
 \item{q}{- quantile, must be a scalar.}
@@ -16,6 +16,10 @@ pbj(q, M, k0, k1, onesided = FALSE)
 \item{k1}{- search range ends at the k1th smallest p-value.}
 
 \item{onesided}{- TRUE if the input p-values are one-sided.}
+
+\item{method}{- default = "ecc": the effective correlation coefficient method in reference 2. "ave": the average method in reference 3, which is an earlier version of reference 2. The "ecc" method is more accurate and numerically stable than "ave" method.}
+
+\item{ei}{- the eigenvalues of M if available.}
 }
 \value{
 The left-tail probability of the null distribution of B-J statistic at the given quantile.
@@ -29,11 +33,9 @@ bjstat <- stat.phi(pval, s=1, k0=1, k1=10)$value
 pbj(q=bjstat, M=diag(10), k0=1, k1=10)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
-
-2. Donoho, David; Jin, Jiashun. "Higher criticism for detecting sparse heterogeneous mixtures". Annals of Statistics 32 (2004).
-
-3. Berk, R.H. & Jones, D.H. Z. "Goodness-of-fit test statistics that dominate the Kolmogorov statistics". Wahrscheinlichkeitstheorie verw Gebiete (1979) 47: 47.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and power of optimal signal-detection statistics in finite case", IEEE Transactions on Signal Processing (2020) 68, 1021-1033
+2. Hong Zhang and Zheyang Wu. "The general goodness-of-fit tests for correlated data", Computational Statistics & Data Analysis (2022) 167, 107379
+3. Hong Zhang and Zheyang Wu. "Generalized Goodness-Of-Fit Tests for Correlated Data", arXiv:1806.03668.
 }
 \seealso{
 \code{\link{stat.bj}} for the definition of the statistic.

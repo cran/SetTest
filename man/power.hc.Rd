@@ -4,8 +4,16 @@
 \alias{power.hc}
 \title{Statistical power of Higher Criticism test.}
 \usage{
-power.hc(alpha, n, beta, method = "gaussian-gaussian", eps = 0, mu = 0,
-  df = 1, delta = 0)
+power.hc(
+  alpha,
+  n,
+  beta,
+  method = "gaussian-gaussian",
+  eps = 0,
+  mu = 0,
+  df = 1,
+  delta = 0
+)
 }
 \arguments{
 \item{alpha}{- type-I error rate.}

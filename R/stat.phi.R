@@ -1,4 +1,4 @@
-#' Construct phi-divergence statitics.
+#' Construct phi-divergence statistics.
 #' @param p - vector of input p-values.
 #' @param s - phi-divergence parameter. s = 2 is the higher criticism statitic.s = 1 is the Berk and Jones statistic.
 #' @param k0 - search range left end parameter. Default k0 = 1.

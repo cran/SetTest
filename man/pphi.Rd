@@ -4,7 +4,7 @@
 \alias{pphi}
 \title{calculate the left-tail probability of phi-divergence under general correlation matrix.}
 \usage{
-pphi(q, M, k0, k1, s = 2, t = 30, onesided = FALSE)
+pphi(q, M, k0, k1, s = 2, t = 30, onesided = FALSE, method = "ecc", ei = NULL)
 }
 \arguments{
 \item{q}{- quantile, must be a scalar.}
@@ -20,6 +20,13 @@ pphi(q, M, k0, k1, s = 2, t = 30, onesided = FALSE)
 \item{t}{- numerical truncation parameter.}
 
 \item{onesided}{- TRUE if the input p-values are one-sided.}
+
+\item{method}{- default = "ecc": the effective correlation coefficient method in reference 2. "ave": the average method in reference 3, which is an earlier version of reference 2. The "ecc" method is more accurate and numerically stable than "ave" method.}
+
+\item{ei}{- the eigenvalues of M if available.}
+}
+\value{
+Left-tail probability of the phi-divergence statistics.
 }
 \description{
 calculate the left-tail probability of phi-divergence under general correlation matrix.
@@ -27,8 +34,12 @@ calculate the left-tail probability of phi-divergence under general correlation 
 \examples{
 M = toeplitz(1/(1:10)*(-1)^(0:9)) #alternating polynomial decaying correlation matrix
 pphi(q=2, M=M, k0=1, k1=5, s=2)
+pphi(q=2, M=M, k0=1, k1=5, s=2, method = "ecc")
+pphi(q=2, M=M, k0=1, k1=5, s=2, method = "ave")
 pphi(q=2, M=diag(10), k0=1, k1=5, s=2)
 }
 \references{
-1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and Statistical Power of Optimal Signal-Detection Methods In Finite Cases", submitted.
+1. Hong Zhang, Jiashun Jin and Zheyang Wu. "Distributions and power of optimal signal-detection statistics in finite case", IEEE Transactions on Signal Processing (2020) 68, 1021-1033
+2. Hong Zhang and Zheyang Wu. "The general goodness-of-fit tests for correlated data", Computational Statistics & Data Analysis (2022) 167, 107379
+3. Hong Zhang and Zheyang Wu. "Generalized Goodness-Of-Fit Tests for Correlated Data", arXiv:1806.03668.
 }

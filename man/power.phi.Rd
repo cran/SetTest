@@ -4,8 +4,17 @@
 \alias{power.phi}
 \title{Statistical power of phi-divergence test.}
 \usage{
-power.phi(alpha, n, s, beta, method = "gaussian-gaussian", eps = 0,
-  mu = 0, df = 1, delta = 0)
+power.phi(
+  alpha,
+  n,
+  s,
+  beta,
+  method = "gaussian-gaussian",
+  eps = 0,
+  mu = 0,
+  df = 1,
+  delta = 0
+)
 }
 \arguments{
 \item{alpha}{- type-I error rate.}

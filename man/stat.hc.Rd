@@ -2,7 +2,7 @@
 % Please edit documentation in R/stat.hc.R
 \name{stat.hc}
 \alias{stat.hc}
-\title{Construct Higher Criticism (HC) statitics.}
+\title{Construct Higher Criticism (HC) statistics.}
 \usage{
 stat.hc(p, k0 = 1, k1 = NA)
 }
@@ -21,7 +21,7 @@ location - the order of the p-values to obtain HC statistic.
 stat - vector of marginal HC statistics.
 }
 \description{
-Construct Higher Criticism (HC) statitics.
+Construct Higher Criticism (HC) statistics.
 }
 \details{
 Let \eqn{p_{(i)}}, \eqn{i = 1,...,n} be a sequence of ordered p-values, the higher criticism statistic
